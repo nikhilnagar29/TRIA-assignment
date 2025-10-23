@@ -1,6 +1,7 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 
+import './TagBar.css'
 /**
  * A horizontal bar for filtering by tags.
  *
@@ -34,22 +35,21 @@ function TagBar({ tags, currentTag, onTagSelect, onAddTag }) {
 
   return (
     // This container is baby pink and allows horizontal scrolling
-    <div className="w-full px-4 py-3 bg-pink-100 overflow-x-auto">
-      <div className="flex items-center space-x-2">
-        {fullTagList.map((tag) => (
-          <TagButton key={tag} tagName={tag} />
-        ))}
-        
-        {/* Add New Tag Button */}
-        <button
-          onClick={onAddTag}
-          className="flex items-center justify-center w-10 h-10 bg-white rounded-full text-pink-600 shadow-sm hover:bg-pink-50 transition-colors flex-shrink-0"
-          aria-label="Add new tag"
-        >
-          <Plus size={20} />
-        </button>
-      </div>
-    </div>
+    <div className="w-full px-4 py-3 bg-pink-100 overflow-x-auto hide-scrollbar">
+  <div className="flex items-center space-x-2">
+    {fullTagList.map((tag) => (
+      <TagButton key={tag} tagName={tag} />
+    ))}
+    <button
+      onClick={onAddTag}
+      className="flex items-center justify-center w-10 h-10 bg-white rounded-full text-pink-600 shadow-sm hover:bg-pink-50 transition-colors flex-shrink-0"
+      aria-label="Add new tag"
+    >
+      <Plus size={20} />
+    </button>
+  </div>
+</div>
+
   );
 }
 

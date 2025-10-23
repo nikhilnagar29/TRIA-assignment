@@ -13,6 +13,11 @@ function SearchBar({ searchTerm, onSearchChange, onClose }) {
     }
   }, []);
 
+  const handleBack = () => {
+    onSearchChange('');
+    onClose();
+  };
+
   return (
     <motion.div
       // Simple fade in/out
@@ -28,7 +33,7 @@ function SearchBar({ searchTerm, onSearchChange, onClose }) {
     >
       {/* --- Back Button --- */}
       <button
-        onClick={onClose}
+        onClick={handleBack}
         className="p-2 mr-2 text-gray-600 rounded-full hover:bg-gray-100"
         aria-label="Close search"
       >

@@ -106,6 +106,19 @@ function App() {
   // --- Main Render ---
   return (
     <div className="flex items-center justify-center w-screen h-screen p-0 bg-pink-100 md:p-8">
+      
+        <AddContactModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onSave={handleSaveContact}
+        />
+        
+         <AddTagModal
+            isOpen={isAddTagModalOpen}
+            onClose={handleCloseAddTagModal}
+            onSave={handleSaveTag}
+        />
+
       <div
         className="
           flex flex-col w-full h-full bg-white overflow-hidden 
@@ -158,20 +171,12 @@ function App() {
           onUpdateTags={updateContactTags}
         />
 
-        <AddContactModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          onSave={handleSaveContact}
-        />
+        
       
       </div>
-      <div className='flex justify-center h-10 w-10 bg-amber-400'>
-        <AddTagModal
-            isOpen={isAddTagModalOpen}
-            onClose={handleCloseAddTagModal}
-            onSave={handleSaveTag}
-        />
-      </div>
+      {/* <div className='flex justify-center h-10 w-10 bg-amber-400'> */}
+       
+      {/* </div> */}
        
     </div>
   );
