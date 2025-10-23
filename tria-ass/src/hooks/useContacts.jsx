@@ -285,6 +285,7 @@ export function useContacts() {
   }, [reAddContact]);
 
   const toggleFavorite = useCallback(async (contact) => {
+    // console.log('toggleFavorite', contact);
     const updatedContact = { ...contact, isFavorite: !contact.isFavorite };
     dispatch({ type: ACTIONS.UPDATE_CONTACT_OPTIMISTIC, payload: updatedContact });
     try {

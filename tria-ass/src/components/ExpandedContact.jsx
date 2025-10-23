@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Heart, Copy, Trash2, Check } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -21,6 +21,20 @@ function ExpandedContact({
 }) {
   const [justCopied, setJustCopied] = useState(false);
 
+  // --- 1. FIXED: Handle null contact ---
+  // Use optional chaining (?.) and provide a default empty array [].
+  // This prevents the 'null.tags' error.
+  const [localTags, setLocalTags] = useState(contact?.tags || []);
+  const [isFavorite, setIsFavorite] = useState(contact?.isFavorite || false);
+
+  // --- 2. FIXED: Handle null contact in useEffect ---
+  // This will now safely update localTags when contact changes,
+  // or reset it to [] if contact becomes null (e.g., when panel closes)
+  useEffect(() => {
+    setLocalTags(contact?.tags || []);
+  }, [contact]); // Depend on the whole 'contact' object
+
+
   const panelVariants = {
     hidden: { x: '100%' },
     visible: { x: 0 },
@@ -39,29 +53,34 @@ function ExpandedContact({
     onClose();
   };
 
-  // --- NEW FUNCTION: Handle Tag Toggle ---
-  // i want when user click on a tag it changes the color of the tag to blue and the text to white
+  const handleToggleFavorite = () => {
+    setIsFavorite((prev) => !prev);
+    onToggleFavorite(contact);
+  }
+
+  // --- Handle Tag Toggle (This logic is fine) ---
   const handleTagToggle = (tagName) => {
-    // Check if the contact *already* has this tag
-    const hasTag = contact.tags.includes(tagName);
+    const hasTag = localTags.includes(tagName);
 
     let newTags = [];
 
     if (hasTag) {
-      // Remove the tag
-      newTags = contact.tags.filter((t) => t !== tagName);
+      newTags = localTags.filter((t) => t !== tagName);
     } else {
-      // Add the tag
-      newTags = [...contact.tags, tagName];
+      newTags = [...localTags, tagName];
     }
     
-    // Call the function from the hook
-    onUpdateTags(contact, newTags);
+    setLocalTags(newTags);
+    
+    // We still call onUpdateTags, but we check if contact exists first
+    if (contact) {
+      onUpdateTags(contact, newTags);
+    }
   };
 
   return (
     <AnimatePresence>
-      {contact && (
+      {contact && ( // This check is still important!
         <motion.div
           variants={panelVariants}
           initial="hidden"
@@ -99,17 +118,17 @@ function ExpandedContact({
             {/* ... Action Buttons (No change) ... */}
             <div className="flex justify-center mb-8 space-x-4">
               <button
-                onClick={() => onToggleFavorite(contact)}
+                onClick={handleToggleFavorite}
                 className="flex flex-col items-center p-3 text-gray-600 rounded-lg w-24 hover:bg-gray-100"
               >
                 <Heart
                   size={24}
                   className={
-                    contact.isFavorite ? 'text-red-500 fill-red-500' : ''
+                    isFavorite ? 'text-red-500 fill-red-500' : ''
                   }
                 />
                 <span className="mt-1 text-sm">
-                  {contact.isFavorite ? 'Favorite' : 'Add Favorite'}
+                  {isFavorite ? 'Favorite' : 'Add Favorite'}
                 </span>
               </button>
               <button
@@ -148,7 +167,7 @@ function ExpandedContact({
               </div>
             </div>
 
-            {/* --- NEW TAGS SECTION --- */}
+            {/* --- NEW TAGS SECTION (This logic is fine) --- */}
             {allTags.length > 0 && (
               <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
                 <h3 className="pb-3 mb-3 text-lg font-semibold text-gray-900 border-b border-gray-200">
@@ -156,7 +175,7 @@ function ExpandedContact({
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {allTags.map((tag) => {
-                    const isTagged = contact.tags.includes(tag);
+                    const isTagged = localTags.includes(tag); // Reads from safe local state
                     return (
                       <button
                         key={tag}

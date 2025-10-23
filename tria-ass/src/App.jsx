@@ -151,6 +151,7 @@ function App() {
         <ExpandedContact
           contact={selectedContact}
           onClose={handleDeselectContact}
+          onDelete={removeContact}
           onToggleFavorite={toggleFavorite}
           // --- PASS NEW PROPS ---
           allTags={availableTags}
@@ -162,12 +163,16 @@ function App() {
           onClose={handleCloseModal}
           onSave={handleSaveContact}
         />
+      
+      </div>
+      <div className='flex justify-center h-10 w-10 bg-amber-400'>
         <AddTagModal
-          isOpen={isAddTagModalOpen}
-          onClose={handleCloseAddTagModal}
-          onSave={handleSaveTag}
+            isOpen={isAddTagModalOpen}
+            onClose={handleCloseAddTagModal}
+            onSave={handleSaveTag}
         />
       </div>
+       
     </div>
   );
 }
