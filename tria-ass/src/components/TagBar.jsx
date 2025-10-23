@@ -1,7 +1,7 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 
-import './TagBar.css'
+import './Tagbar.css'
 /**
  * A horizontal bar for filtering by tags.
  *
