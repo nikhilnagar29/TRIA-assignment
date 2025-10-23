@@ -1,46 +1,83 @@
-# React + Vite
+# Tria - Frontend Assignment (Contact List)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a full-stack, high-performance contact management application built for the Tria frontend assignment. It features a React (Vite) frontend and a Node.js (Express) backend.
 
-Currently, two official plugins are available:
+The application is designed to be robust, scalable, and professional, handling 5,000+ contacts with server-side pagination/search and client-side virtualization.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🔗 Live Demo
 
-## React Compiler
+**[https://your-deployed-app-link.vercel.app/](https://your-deployed-app-link.vercel.app/)**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*(Note: The free Render backend may take 30-60 seconds to "wake up" on the first load.)*
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ✨ Features
 
+[cite_start]This project implements all core requirements  and adds several "standout" features to demonstrate product sense and technical skill:
 
-client/
-├── node_modules/
-├── public/
-│   └── index.html
-├── src/
-│   ├── api/
-│   │   └── contactApi.js         <-- For all Axios/fetch calls
-│   ├── assets/                 <-- For any static images (e.g., logo)
-│   ├── components/
-│   │   ├── AddContactModal.js    <-- Pop-up form
-│   │   ├── Avatar.js             <-- Shows image or "JB"
-│   │   ├── ContactCard.js        <-- Each row in the list
-│   │   ├── ContactList.js        <-- The virtualized list component
-│   │   ├── EmptyState.js         <-- "No contacts found"
-│   │   ├── ExpandedContact.js    <-- Details, favorite, delete
-│   │   ├── Header.js             <-- Title, Add button
-│   │   ├── SearchBar.js          <-- The debounced search input
-│   │   └── SkeletonLoader.js     <-- Loading state
-│   ├── hooks/
-│   │   ├── useContacts.js        <-- *ALL* logic (fetch, search, add, delete)
-│   │   └── useDebounce.js        <-- Debounce logic
-│   ├── App.js                    <-- Main layout component
-│   ├── index.css                 <-- Tailwind imports
-│   └── index.js                  <-- React entry point
-├── tailwind.config.js          <-- Tailwind config
-├── postcss.config.js           <-- Tailwind config
-├── package.json
-└── package-lock.json
+* **Full-Stack Architecture:** A separate Node.js API handles all business logic and serves data.
+* **High-Performance List (5,000+ Items):**
+    * **Server-Side Pagination:** The app only fetches contacts as you scroll (infinite scrolling).
+    * **Server-Side Search:** Search is debounced and executed on the server, keeping the UI fast.
+    * **List Virtualization:** Uses `@tanstack/react-virtual` to render *only* the visible rows, maintaining a high frame rate.
+* **Full CRUD Operations:**
+    * [cite_start]**Create:** Add new contacts via a polished modal[cite: 7].
+    * [cite_start]**Read:** View all contacts [cite: 5] and expanded contact details.
+    * **Update:** Toggle contacts as "Favorite" and manage tags.
+    * **Delete:** Delete contacts with an **"Undo"** option via `react-hot-toast`.
+* **Tag Management System:**
+    * Create custom tags (e.g., "Family", "Work").
+    * Filter the contact list by any tag, including "All" and "Favourite".
+    * Assign or unassign multiple tags to any contact.
+* **Polished UI/UX:**
+    * Smooth animations with `framer-motion` for modals, panels, and header transitions.
+    * **Full State Handling:** Includes skeleton loaders (for loading), empty states (for no results or errors), and clear validation.
+    * Fully responsive design for mobile and desktop.
+
+---
+
+### 🛠 Tech Stack & Libraries Used
+
+[cite_start]This section outlines the main technologies used and *why* they were chosen, as requested in the assignment[cite: 24].
+
+#### Client (Frontend)
+
+* [cite_start]**React (with Vite):** Required by the assignment[cite: 12]. `useReducer` and custom hooks (`useContacts.js`) are used to centralize and manage complex state.
+* **Tailwind CSS:** A utility-first CSS framework for rapidly building a clean, modern, and responsive UI.
+* **`@tanstack/react-virtual`:** A powerful "headless" virtualization library. This was chosen to ensure the UI remains fast and responsive, even with thousands of contacts.
+* **`framer-motion`:** Used for all animations. It provides a simple and declarative API to create fluid, professional-grade UI transitions.
+* **`axios`:** For robust, clean, and standardized API requests to the backend.
+* **`react-hot-toast`:** Used for all notifications, especially the critical "Undo Delete" feature.
+* **`lucide-react`:** A lightweight and clean icon library.
+
+#### Server (Backend)
+
+* **Node.js & Express:** Used to create a scalable, fast, and familiar API backend.
+* **`@faker-js/faker`:** To generate a realistic mock dataset of 5,000 contacts.
+* **`cors`:** To handle cross-origin requests from the React client.
+
+---
+
+### 🚀 Setup and Running Locally
+
+[cite_start]Follow these instructions to run the project on your local machine[cite: 22].
+
+#### Prerequisites
+
+* Node.js (v18 or later)
+* npm
+
+#### 1. Server (Backend)
+
+First, set up and run the Node.js server.
+
+```bash
+# 1. Navigate to the server directory
+cd server
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the server
+npm start
