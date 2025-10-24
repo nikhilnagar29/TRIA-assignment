@@ -1,3 +1,4 @@
+// src/api/contactApi.js
 import axios from 'axios';
 
 // Get the API URL from environment variables
@@ -9,24 +10,24 @@ const api = axios.create({
 
 /**
  * Fetches contacts.
- * UPDATED to accept a 'tag' parameter.
+ * Accepts page, limit, search, and tag parameters.
  */
 export const getContacts = async ({ page = 1, limit = 50, search = '', tag = 'All' }) => {
-
-  const response = await api.get('/contacts', {
-    params: { page, limit, search, tag }, // Add tag to params
-  });
-
-  if(tag !== 'All') {
-    console.log('tag is not All ' , tag);
-    console.log(response.data);
+  // console.log(`API: Fetching page=${page}, limit=${limit}, search="${search}", tag="${tag}"`); // Added log
+  try {
+    const response = await api.get('/contacts', {
+      params: { page, limit, search, tag }, // Pass all params
+    });
+    // console.log(`API: Received ${response.data.contacts.length} contacts`); // Added log
+    return response.data;
+  } catch (error) {
+    console.error("API Error fetching contacts:", error.response?.data || error.message);
+    throw error; // Re-throw the error to be caught by useContacts
   }
-  return response.data;
 };
 
 /**
  * Creates a new contact.
- * (No changes needed)
  */
 export const createContact = async (contactData) => {
   const response = await api.post('/contacts', contactData);
@@ -34,28 +35,23 @@ export const createContact = async (contactData) => {
 };
 
 /**
- * Updates a contact.
- * (No changes needed, it's flexible)
+ * Updates a contact (e.g., isFavorite or tags).
  */
 export const updateContact = async (id, updateData) => {
-  // updateData can be { isFavorite: ... } or { tags: [...] }
   const response = await api.put(`/contacts/${id}`, updateData);
   return response.data;
 };
 
 /**
  * Deletes a contact.
- * (No changes needed)
  */
 export const deleteContact = async (id) => {
   const response = await api.delete(`/contacts/${id}`);
   return response.data;
 };
 
-// --- NEW FUNCTIONS ---
-
 /**
- * [GET] Fetches the list of all available tags.
+ * Fetches the list of all available tags.
  */
 export const getTags = async () => {
   const response = await api.get('/tags');
@@ -63,7 +59,7 @@ export const getTags = async () => {
 };
 
 /**
- * [POST] Creates a new tag.
+ * Creates a new tag.
  * @param {string} tagName
  */
 export const createTag = async (tagName) => {

@@ -152,6 +152,7 @@ function App() {
           currentTag={currentTag}
           onTagSelect={setCurrentTag}
           onAddTag={handleOpenAddTagModal} // <-- 6. Pass the new handler
+          onClose={handleCloseAddTagModal}
         />
         
 

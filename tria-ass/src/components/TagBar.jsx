@@ -10,15 +10,28 @@ import './Tagbar.css'
  * @param {function} onTagSelect - Callback when a tag is clicked
  * @param {function} onAddTag - Callback when the '+' button is clicked
  */
-function TagBar({ tags, currentTag, onTagSelect, onAddTag }) {
+function TagBar({ tags, currentTag, onTagSelect, onAddTag, onClose }) {
   // We manually add 'All' and 'Favourite' to the list
   const fullTagList = ['All', 'Favourite', ...tags];
+
+  const handleTagToggle = (tagName) => {
+    if (currentTag === tagName) {
+      if(tagName === 'All'){
+        onClose(); // Do nothing if 'All' is clicked again
+      } 
+      else{
+        onTagSelect('All'); // Deselect if already selected
+      }
+    } else {
+      onTagSelect(tagName);
+    }
+  };
 
   const TagButton = ({ tagName }) => {
     const isActive = currentTag === tagName;
     return (
       <button
-        onClick={() => isActive ? onTagSelect('All') : onTagSelect(tagName)}
+        onClick={() => handleTagToggle(tagName)}
         className={`
           px-4 py-2 text-sm font-semibold rounded-full
           transition-colors whitespace-nowrap

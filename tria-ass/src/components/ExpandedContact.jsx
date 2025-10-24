@@ -32,6 +32,7 @@ function ExpandedContact({
   // or reset it to [] if contact becomes null (e.g., when panel closes)
   useEffect(() => {
     setLocalTags(contact?.tags || []);
+    setIsFavorite(contact?.isFavorite || false);
   }, [contact]); // Depend on the whole 'contact' object
 
 
@@ -90,7 +91,7 @@ function ExpandedContact({
           className="absolute inset-0 z-10 flex flex-col w-full h-full bg-gray-50"
         >
           {/* --- Header --- */}
-          <header className="flex items-center p-4 border-b border-gray-200">
+          <header className="flex items-center flex-shrink-0 p-4 border-b border-gray-200">
             <button
               onClick={onClose}
               className="p-2 text-gray-600 rounded-full hover:bg-gray-100"
@@ -200,8 +201,13 @@ function ExpandedContact({
             
           </main>
 
-          {/* ... Footer (Delete Button) (No change) ... */}
-          <footer className="p-4 border-t border-gray-200">
+          {/* --- FIXED FOOTER --- */}
+          {/*
+            We add `pb-8` (more bottom padding) on mobile to avoid the "safe area" / home bar.
+            We reset it to `md:pb-4` on desktop.
+            We also add `bg-gray-50` to match the panel's background.
+          */}
+          <footer className="flex-shrink-0 p-4 pb-8 bg-gray-50 border-t border-gray-200 md:pb-4">
             <button
               onClick={handleDelete}
               className="flex items-center justify-center w-full px-4 py-3 font-medium text-red-600 bg-red-100 rounded-lg hover:bg-red-200"
