@@ -6,7 +6,7 @@ The application is designed to be robust, scalable, and professional, handling 5
 
 ### 🔗 Live Demo
 
-**[https://your-deployed-app-link.vercel.app/](https://your-deployed-app-link.vercel.app/)**
+**[https://tria-assignment-lilac.vercel.app/](https://tria-assignment-lilac.vercel.app/)**
 
 *(Note: The free Render backend may take 30-60 seconds to "wake up" on the first load.)*
 
