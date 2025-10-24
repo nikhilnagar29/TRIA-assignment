@@ -1,83 +1,100 @@
 # Tria - Frontend Assignment (Contact List)
 
-This is a full-stack, high-performance contact management application built for the Tria frontend assignment. It features a React (Vite) frontend and a Node.js (Express) backend.
+This is a high-performance React contact management application built for the Tria frontend assignment using Vite. It interacts with a provided Node.js API to efficiently manage and display contact data.
 
-The application is designed to be robust, scalable, and professional, handling 5,000+ contacts with server-side pagination/search and client-side virtualization.
+The application is designed to be robust, scalable, and professional, capable of handling 5,000+ contacts smoothly through techniques like API-driven pagination/search and UI list virtualization.
 
 ### 🔗 Live Demo
 
-**[https://your-deployed-app-link.vercel.app/](https://your-deployed-app-link.vercel.app/)**
+**[https://tria-assignment-lilac.vercel.app/](https://tria-assignment-lilac.vercel.app/)**
 
-*(Note: The free Render backend may take 30-60 seconds to "wake up" on the first load.)*
+*(**Note:** The free backend hosting service may take 30-60 seconds to "wake up" on the first visit if it hasn't been accessed recently.)*
 
 ---
 
-### ✨ Features
+## ✨ Features
 
-[cite_start]This project implements all core requirements  and adds several "standout" features to demonstrate product sense and technical skill:
+This project implements all core requirements and adds several notable features:
 
-* **Full-Stack Architecture:** A separate Node.js API handles all business logic and serves data.
 * **High-Performance List (5,000+ Items):**
-    * **Server-Side Pagination:** The app only fetches contacts as you scroll (infinite scrolling).
-    * **Server-Side Search:** Search is debounced and executed on the server, keeping the UI fast.
-    * **List Virtualization:** Uses `@tanstack/react-virtual` to render *only* the visible rows, maintaining a high frame rate.
+    * Efficiently handles large datasets by consuming API features like **server-side pagination** (implemented with infinite scrolling).
+    * Features **debounced server-side search**, ensuring the UI remains responsive even during searches on large lists.
+    * Utilizes **List Virtualization** (`@tanstack/react-virtual`) to render only the visible contact rows, maintaining a high frame rate and smooth scrolling.
 * **Full CRUD Operations:**
-    * [cite_start]**Create:** Add new contacts via a polished modal[cite: 7].
-    * [cite_start]**Read:** View all contacts [cite: 5] and expanded contact details.
-    * **Update:** Toggle contacts as "Favorite" and manage tags.
-    * **Delete:** Delete contacts with an **"Undo"** option via `react-hot-toast`.
+    * **Create:** Add new contacts via a polished modal interface.
+    * **Read:** View all contacts and display expanded details in a sliding panel.
+    * **Update:** Toggle contacts as "Favorite" and manage assigned tags.
+    * **Delete:** Remove contacts with a user-friendly **"Undo"** option provided via toast notifications (`react-hot-toast`).
 * **Tag Management System:**
-    * Create custom tags (e.g., "Family", "Work").
-    * Filter the contact list by any tag, including "All" and "Favourite".
-    * Assign or unassign multiple tags to any contact.
+    * Create custom tags (e.g., "Family", "Work") via a dedicated modal.
+    * Filter the contact list dynamically by any tag, including default "All" and "Favourite" options.
+    * Assign or unassign multiple tags to contacts within the expanded view.
 * **Polished UI/UX:**
-    * Smooth animations with `framer-motion` for modals, panels, and header transitions.
-    * **Full State Handling:** Includes skeleton loaders (for loading), empty states (for no results or errors), and clear validation.
-    * Fully responsive design for mobile and desktop.
+    * Incorporates smooth animations using `framer-motion` for modals, the expanded contact panel, and header transitions.
+    * Provides comprehensive state handling: includes **skeleton loaders** during data fetching, informative **empty states** for no results or errors, and basic form validation.
+    * Features a fully **responsive design**, adapting cleanly to both mobile and desktop viewports.
 
 ---
 
-### 🛠 Tech Stack & Libraries Used
+## 🛠 Tech Stack & Libraries Used
 
-[cite_start]This section outlines the main technologies used and *why* they were chosen, as requested in the assignment[cite: 24].
+This section outlines the main frontend technologies used and the rationale behind their selection:
 
-#### Client (Frontend)
-
-* [cite_start]**React (with Vite):** Required by the assignment[cite: 12]. `useReducer` and custom hooks (`useContacts.js`) are used to centralize and manage complex state.
-* **Tailwind CSS:** A utility-first CSS framework for rapidly building a clean, modern, and responsive UI.
-* **`@tanstack/react-virtual`:** A powerful "headless" virtualization library. This was chosen to ensure the UI remains fast and responsive, even with thousands of contacts.
-* **`framer-motion`:** Used for all animations. It provides a simple and declarative API to create fluid, professional-grade UI transitions.
-* **`axios`:** For robust, clean, and standardized API requests to the backend.
-* **`react-hot-toast`:** Used for all notifications, especially the critical "Undo Delete" feature.
-* **`lucide-react`:** A lightweight and clean icon library.
-
-#### Server (Backend)
-
-* **Node.js & Express:** Used to create a scalable, fast, and familiar API backend.
-* **`@faker-js/faker`:** To generate a realistic mock dataset of 5,000 contacts.
-* **`cors`:** To handle cross-origin requests from the React client.
+* **React (with Vite):** The required framework for the assignment. State management is handled primarily through `useReducer` within a custom hook (`useContacts.jsx`) to centralize logic for fetching, filtering, and optimistic updates.
+* **Tailwind CSS:** A utility-first CSS framework chosen for its ability to rapidly build a clean, modern, and responsive UI without writing extensive custom CSS.
+* **`@tanstack/react-virtual`:** Implements list virtualization. Selected to guarantee high performance and a smooth user experience when displaying potentially thousands of contacts.
+* **`framer-motion`:** Used for all UI animations (modals, panels, header transitions). Chosen for its simple and declarative API that enables fluid and professional-looking animations.
+* **`axios`:** Handles API requests. Preferred for its widespread adoption, ease of use, and features like interceptors and robust error handling.
+* **`react-hot-toast`:** Provides notifications. Specifically chosen for its flexibility in creating custom toast components, enabling the "Undo Delete" functionality.
+* **`lucide-react`:** Supplies icons. Selected for its lightweight nature, tree-shakability, and clean icon design.
 
 ---
 
-### 🚀 Setup and Running Locally
+## 🚀 Setup and Running Locally
 
-[cite_start]Follow these instructions to run the project on your local machine[cite: 22].
+Follow these instructions to run the React frontend application on your local machine:
 
 #### Prerequisites
 
-* Node.js (v18 or later)
-* npm
+* Node.js (v18 or later recommended)
+* npm (usually comes with Node.js)
 
-#### 1. Server (Backend)
+#### Steps
 
-First, set up and run the Node.js server.
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/nikhilnagar29/tria-assignment.git](https://github.com/nikhilnagar29/tria-assignment.git)
+    cd tria-assignment/tria-ass
+    ```
 
-```bash
-# 1. Navigate to the server directory
-cd server
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-# 2. Install dependencies
-npm install
+3.  **Set up Environment Variables:**
+    Create a `.env` file in the `tria-ass` directory (the same level as `package.json`). Add the following line, pointing to the backend API:
+    ```env
+    VITE_API_URL=[https://tria-assignment.onrender.com/api](https://tria-assignment.onrender.com/api)
+    ```
+    *(This is the default backend URL used for the deployed version)*
 
-# 3. Start the server
-npm start
+4.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+    The application should now be running, typically at `http://localhost:5173`.
+
+---
+
+## 📝 Assumptions & Design Choices
+
+* **API Interaction:** The frontend assumes the presence of the specific API endpoints defined in `src/api/contactApi.js`. All data fetching, searching, and filtering logic relies on this API structure.
+* **State Management:** `useReducer` combined with a custom hook (`useContacts.jsx`) was chosen over context or external libraries (like Redux/Zustand) for managing the contact-related state. This approach keeps the state logic co-located and avoids unnecessary prop drilling without adding external dependencies for this specific scope.
+* **Performance:** List virtualization (`@tanstack/react-virtual`) was implemented proactively to ensure the application scales well even with the requirement of handling 5,000+ contacts. Server-side pagination and search were leveraged via the API for the same reason.
+* **UI/UX:**
+    * **Optimistic Updates:** CRUD actions (add, delete, update favorite/tags) update the UI immediately before waiting for the API response to provide a faster perceived performance. Error handling reverts these changes if the API call fails.
+    * **Debouncing:** Search input is debounced (`useDebounce.js`) to prevent excessive API calls while the user is typing.
+    * **Modals & Panels:** Modals (`AddContactModal`, `AddTagModal`) and the `ExpandedContact` panel are implemented using React Portals and `framer-motion` for smooth transitions and consistent layering.
+
+---
